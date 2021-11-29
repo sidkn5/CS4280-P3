@@ -1,10 +1,10 @@
 //Sean Dela Pena
 //File: parser.cpp
 //
-// Assignment P2 - Parser
+// Assignment P3 - Semantics
 // Professor: Mark Hauschild
 // Class : CS 4280
-// Date : 11 - 13 - 21
+// Date : 11 - 28 - 21
 
 #include "parser.hpp"
 #include "scanner.hpp"
@@ -48,7 +48,7 @@ Node* parser() {
 	tk = scanner();
 	root = program();
 	if (tk.type == EOFTK) {
-		std::cout << "Parser Completed/Passed\n";
+		//std::cout << "Parser Completed/Passed\n";
 		//exit(1);
 		//end
 	}

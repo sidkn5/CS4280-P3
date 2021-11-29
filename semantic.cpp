@@ -25,7 +25,7 @@ void getTree(Node* node) {
 void semantic(Node *node) {
 
 	if (node == NULL) {
-		std::cout << "ERROR: Tree is empty...\n";
+		std::cout << "SEMANTIC ERROR: Tree is empty...\n";
 		exit(1);
 	}
 	
@@ -39,7 +39,7 @@ void semantic(Node *node) {
 
 //set the string and the scope of element then push to vector/stack
 void push(std::string str, int scope) {
-	std::cout << "PUSHING " << str << std::endl;
+	//std::cout << "Pushing variable " << str << std::endl;
 	variable newVariable;
 	newVariable.varString = str;
 	newVariable.varScope = scope;
@@ -49,7 +49,7 @@ void push(std::string str, int scope) {
 
 //pop the very end of the vector, similar to popping the top of a stack
 void pop() {
-	std::cout << "Popping " << std::endl;
+	//std::cout << "Popping variable " << std::endl;
 	variableStack.pop_back();
 	return;
 }
@@ -61,7 +61,7 @@ int find(std::string varString, int varScope) {
 		
 		//check if the variable is in the stack, matching with it's scope
 		if (variableStack.at(i).varString == varString && variableStack.at(i).varScope == varScope) {
-			std::cout << varString << " found in stack..\n";
+			//std::cout<< "Variable " << varString << " found in stack..\n";
 			return 1;
 		}
 	}
@@ -77,13 +77,15 @@ void getVariablesLeft(Node* node) {
 	if (node->token1.type == IDTK) {
 
 		if (find(node->token1.tokenString, GLOBALSCOPE) != -1) {
-			//the id is already in the stack, we're dealing with globals
+			//the id is already in the vector/stack, we're dealing with globals
 			error2(node->token1.tokenString);
 		}
 		else {
+			//add the id to the vector/stack
 			push(node->token1.tokenString, GLOBALSCOPE);
 		}
 		if (node->child1 != NULL) {
+			//recur
 			getVariablesLeft(node->child1);
 		}
 	}
@@ -100,14 +102,16 @@ void getVariablesRight(Node* node, int &varCount) {
 	if (node->token1.type == IDTK) {
 	
 		if (find(node->token1.tokenString, LOCALSCOPE) != -1) {
-			//the id is already in the stack, we're dealing with locals
+			//the id is already in the vector/stack, we're dealing with locals
 			error2(node->token1.tokenString);
 		}
 		else {
+			//add the id to the vector/stack
 			push(node->token1.tokenString, LOCALSCOPE);
 			varCount++;
 		}
 		if (node->child1 != NULL) {
+			//recur
 			getVariablesRight(node->child1, varCount);
 		}
 	}
@@ -117,6 +121,7 @@ void getVariablesRight(Node* node, int &varCount) {
 
 }
 
+//traversing the block node
 void getBlock(Node* node) {
 
 	int varCount = 0;	//init a varcount to 0 when you get a block
@@ -194,12 +199,12 @@ void preOrder(Node* node) {
 }
 
 void error(std::string var) {
-	std::cout << "SEMANTIC ERROR: This variable \"" << var << "\" has not been declared. \n";
+	std::cout << "SEMANTIC ERROR: This variable \"" << var << "\" has NOT been declared. \n";
 	exit(1);
 }
 
 void error2(std::string str) {
-	std::cout << "SEMANTIC ERROR: This variable \"" << str << "\" has already been declared. \n";
+	std::cout << "SEMANTIC ERROR: This variable \"" << str << "\" has ALREADY been declared. \n";
 	exit(1);
 }
 
