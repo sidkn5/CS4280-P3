@@ -1,4 +1,4 @@
-declare y = 5 ;
+declare y = 0;
 program
 start
    declare a = 2;

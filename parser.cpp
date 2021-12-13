@@ -401,7 +401,8 @@ Node* stat() {
 	}
 	else {
 		//should not be able to reach here
-		return NULL;
+		//return NULL;
+		error2();
 	}
 
 	return NULL;
@@ -635,5 +636,10 @@ void error(token errorTk, int expectedToken) {
 	std::cout << "Parser Error: There is an error! \n";
 	std::cout << "Parser Error: ERROR in tk " << expectedTokens[errorTk.type] << " expected " << expectedTokens[expectedToken] <<
 		" in line " << errorTk.lineNum << "\n";
+	exit(1);
+}
+
+void error2(){
+	std::cout << "Parser Error: Statement expected. Statement can't be empty. \n";
 	exit(1);
 }

@@ -1,6 +1,6 @@
 Student: Sean Dela Pena 
 Professor: Mark Hauschild
-Assignment: Project 4 - CS 4280
+Assignment: Project 3 - CS 4280
 	Semantics
 Date: 11/28/21
 

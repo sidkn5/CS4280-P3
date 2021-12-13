@@ -34,5 +34,5 @@ Node* gotoFunc();
 
 
 void error(token errorTk, int expectedToken);
-
+void error2();
 #endif
